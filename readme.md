@@ -26,3 +26,12 @@ cd ./client/clienthandlers
 git pull
 cd ../..
 ```
+
+Make a similar change in update.sh:
+
+```
+# uncomment if using custom client code
+#cd ./client/clienthandlers
+#git pull
+#cd ../..
+```
