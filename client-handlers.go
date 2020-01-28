@@ -2,7 +2,9 @@ package clienthandlers
 
 import (
 	"fmt"
+	"github.com/tsawler/goblender/client/clienthandlers/clientmodels"
 	"net/http"
+	"time"
 )
 
 func TestHandler(w http.ResponseWriter, r *http.Request) {
@@ -11,5 +13,13 @@ func TestHandler(w http.ResponseWriter, r *http.Request) {
 
 
 func TestProtectedHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Worked!")
+	example := clientmodels.Sample{
+		ID:        1,
+		Name:      "Jack",
+		Phone:     "506-444-5555",
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+	}
+
+	w.Write([]byte(fmt.Sprintf("It worked, and name is %s", example.Name)))
 }
