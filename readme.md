@@ -9,7 +9,7 @@ git repository. When working in JetBrains Goland, you must create
 (or clone) a git repository in this location, and then add the directory
 in Preferences -> Version Control.
 
-Next, uncomment the three lines specified in run.sh to include
+Next, uncomment the three lines specified in `run.sh` to include
 a git pull when running the app:
 
 ```
@@ -27,7 +27,7 @@ git pull
 cd ../..
 ```
 
-Make a similar change in update.sh:
+Make a similar change in `update.sh`:
 
 ```
 # uncomment if using custom client code
