@@ -1,7 +1,6 @@
 package clienthandlers
 
 import (
-	"fmt"
 	"github.com/bmizerany/pat"
 	"github.com/justinas/alice"
 	"github.com/tsawler/goblender/client/clienthandlers/clientdb"
@@ -28,6 +27,5 @@ func ClientRoutes(mux *pat.PatternServeMux, standardMiddleWare, dynamicMiddlewar
 func ClientInit(c config.AppConfig) {
 	app = c
 	conn := app.Connections["NBTAP"]
-	fmt.Print("Conn:", conn)
 	pageModel = &clientdb.PageModel{DB: conn}
 }
