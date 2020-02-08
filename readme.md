@@ -16,7 +16,7 @@ git repository. When working in JetBrains Goland, you must create
 (or clone) a git repository in this location, and then add the directory
 in Preferences -> Version Control.
 
-# Updating on server
+## Updating on server
 Change  `update.sh` to enable git pull of client:
 
 ```
