@@ -10,7 +10,7 @@ type PageModel struct {
 }
 
 
-// AllPages returns slice of pages, for use in admin tool
+// AllPages returns slice of pages from goblender's database
 func (m *PageModel) AllPages() ([]*models.Page, error) {
 	stmt := "SELECT id, page_title, active, slug, created_at, updated_at FROM pages ORDER BY page_title"
 
