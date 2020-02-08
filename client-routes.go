@@ -11,7 +11,7 @@ import (
 // using the middleware.* functions. All handlers are available in appHandlers, e.g. to use pageHandlers, appHandlers.PageHandlers
 func ClientRoutes(mux *pat.PatternServeMux, standardMiddleWare, dynamicMiddleware alice.Chain) (*pat.PatternServeMux, error) {
 
-	//mux.Get("/", dynamicMiddleware.ThenFunc(ph.Home))
+	mux.Get("/", dynamicMiddleware.ThenFunc(pageHandlers.Home))
 
 	mux.Get("/client/some-handler", standardMiddleWare.ThenFunc(SomeHandler))
 
