@@ -4,14 +4,14 @@ Sample code for client specific code for GoBlender.
 
 ## Setup
 
-First, install goblender.
+First, install [goblender](https://github.com/tsawler/goblender).
 
-This code lives in `./client/clienthandlers`, and is its own 
+All client specific code lives in `./client/clienthandlers`, and is its own 
 git repository. When working in JetBrains Goland, you must create 
 (or clone) a git repository in this location, and then add the directory
 in Preferences -> Version Control.
 
-
+# Updating on server
 Change  `update.sh` to enable git pull of client:
 
 ```
@@ -29,3 +29,4 @@ cd ./client/clienthandlers
 git pull
 cd ../..
 ```
+
