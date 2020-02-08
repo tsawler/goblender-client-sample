@@ -42,10 +42,10 @@ func ClientInit(c config.AppConfig, p *driver.DB) {
 	pageModel = page.NewSQLPageRepo(p.SQL)
 
 	// we can have as many standard handlers from goblender, but need to initialize them first
-	preferenceHandlers = handlers.NewPreferenceHandlers(p)
-	historyHandlers = handlers.NewHistoryHandler(p)
-	roleHandlers = handlers.NewRoleHandlers(p, historyHandlers)
-	userHandlers = handlers.NewUserHandlers(app, p, roleHandlers)
-	pageHandlers = handlers.NewPageHandler(app, p, userHandlers, preferenceHandlers)
-	postHandlers = handlers.NewPostHandlers(app, p, pageHandlers)
+	//preferenceHandlers = handlers.NewPreferenceHandlers(p)
+	//historyHandlers = handlers.NewHistoryHandler(p)
+	//roleHandlers = handlers.NewRoleHandlers(p, historyHandlers)
+	//userHandlers = handlers.NewUserHandlers(app, p, roleHandlers)
+	//pageHandlers = handlers.NewPageHandler(app, p, userHandlers, preferenceHandlers)
+	//postHandlers = handlers.NewPostHandlers(app, p, pageHandlers)
 }

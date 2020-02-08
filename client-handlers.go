@@ -17,10 +17,10 @@ type JSONResponse struct {
 // to build custom functionality without having to use non-standard routes.
 //
 // Note that the template below doesn't actually exist in this repo ,and this handler is never really called.
-func ShowHome(w http.ResponseWriter, r *http.Request) {
-	pageHandlers.SetDefaultPageTemplate("client-page.page.tmpl")
-	pageHandlers.Home(w, r)
-}
+//func ShowHome(w http.ResponseWriter, r *http.Request) {
+//	pageHandlers.SetDefaultPageTemplate("client-page.page.tmpl")
+//	pageHandlers.Home(w, r)
+//}
 
 
 // SomeHandler is an example handler
