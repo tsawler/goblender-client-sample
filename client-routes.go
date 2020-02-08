@@ -13,7 +13,7 @@ func ClientRoutes(mux *pat.PatternServeMux, standardMiddleWare, dynamicMiddlewar
 
 	//mux.Get("/", dynamicMiddleware.ThenFunc(ShowHome))
 
-	mux.Get("/some-handler", standardMiddleWare.ThenFunc(SomeHandler))
+	mux.Get("/client/some-handler", standardMiddleWare.ThenFunc(SomeHandler))
 
 	// public folder
 	fileServer := http.FileServer(http.Dir("./client/clienthandlers/public/"))

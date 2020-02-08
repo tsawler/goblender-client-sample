@@ -1,6 +1,8 @@
 package clienthandlers
 
 import (
+	"github.com/tsawler/goblender/pkg/helpers"
+	"github.com/tsawler/goblender/pkg/templates"
 	"net/http"
 )
 
@@ -23,5 +25,5 @@ func ShowHome(w http.ResponseWriter, r *http.Request) {
 
 // SomeHandler is an example handler
 func SomeHandler(w http.ResponseWriter, r *http.Request) {
-	// ... do whatever
+	helpers.Render(w, r, "client-sample.page.tmpl", &templates.TemplateData{})
 }
