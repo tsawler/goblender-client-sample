@@ -41,11 +41,25 @@ func ClientInit(c config.AppConfig, p *driver.DB) {
 	// if we want a local model, eg one to hit pages in goblender's db:
 	pageModel = page.NewSQLPageRepo(p.SQL)
 
-	// we can have as many standard handlers from goblender, but need to initialize them first
-	//preferenceHandlers = handlers.NewPreferenceHandlers(p)
-	//historyHandlers = handlers.NewHistoryHandler(p)
-	//roleHandlers = handlers.NewRoleHandlers(p, historyHandlers)
-	//userHandlers = handlers.NewUserHandlers(app, p, roleHandlers)
-	//pageHandlers = handlers.NewPageHandler(app, p, userHandlers, preferenceHandlers)
-	//postHandlers = handlers.NewPostHandlers(app, p, pageHandlers)
+	infoLog = app.InfoLog
+	errorLog = app.ErrorLog
+	pageModel = page.NewSQLPageRepo(p.SQL)
+	parentDB = p
+
+	// we can access handlers from goblender, but need to initialize them first
+	if app.Database == "postgresql" {
+		preferenceHandlers = handlers.NewPostgresPreferenceHandlers(p)
+		historyHandlers = handlers.NewPostgresHistoryHandler(p)
+		roleHandlers = handlers.NewPostgresRoleHandlers(p, historyHandlers)
+		userHandlers = handlers.NewPostgresUserHandlers(app, p, roleHandlers)
+		pageHandlers = handlers.NewPostgresPageHandler(app, p, userHandlers, preferenceHandlers)
+		postHandlers = handlers.NewPostgresPostHandlers(app, p, pageHandlers)
+	} else {
+		preferenceHandlers = handlers.NewPreferenceHandlers(p)
+		historyHandlers = handlers.NewHistoryHandler(p)
+		roleHandlers = handlers.NewRoleHandlers(p, historyHandlers)
+		userHandlers = handlers.NewUserHandlers(app, p, roleHandlers)
+		pageHandlers = handlers.NewPageHandler(app, p, userHandlers, preferenceHandlers)
+		postHandlers = handlers.NewPostHandlers(app, p, pageHandlers)
+	}
 }
