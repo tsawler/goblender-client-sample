@@ -5,6 +5,7 @@ import (
 	"github.com/tsawler/goblender/pkg/models"
 )
 
+// PageModel wraps database
 type PageModel struct {
 	DB *sql.DB
 }

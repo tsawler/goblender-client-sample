@@ -2,6 +2,7 @@ package clientmodels
 
 import "time"
 
+// Sample is a sample model
 type Sample struct {
 	ID        int
 	Name      string
