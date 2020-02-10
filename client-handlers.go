@@ -22,7 +22,6 @@ type JSONResponse struct {
 //	pageHandlers.Home(w, r)
 //}
 
-
 // SomeHandler is an example handler
 func SomeHandler(w http.ResponseWriter, r *http.Request) {
 	helpers.Render(w, r, "client-sample.page.tmpl", &templates.TemplateData{})
