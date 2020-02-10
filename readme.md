@@ -6,7 +6,7 @@
 
 # GoBlender client
 
-Sample code for client specific code for GoBlender.
+Sample project for client specific code for GoBlender.
 
 ## Setup
 
@@ -18,7 +18,7 @@ git repository. When working in JetBrains Goland, you must create
 in Preferences -> Version Control.
 
 ## Updating on server
-Change  `update.sh` to enable git pull of client:
+Change  `update.sh` in GoBlender root folder so as to enable git pull of client:
 
 ```
 # uncomment if using custom client code
