@@ -16,7 +16,7 @@ func SomeHandler(w http.ResponseWriter, r *http.Request) {
 // to build custom functionality without having to use non-standard routes.
 // **Note** that the template below *doesn't actually exist* in this repo ,and this handler is never really called.
 
-// ShowHome shows home page using custom template, and overrides the route in default goblender application
+// ShowHome shows home page using custom template, and overrides the handler in default goblender application (pageHandlers.Home)
 //func ShowHome(w http.ResponseWriter, r *http.Request) {
 //	pageHandlers.SetDefaultPageTemplate("custom-home--page.page.tmpl")
 //	pageHandlers.Home(w, r)
