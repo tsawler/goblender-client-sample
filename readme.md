@@ -79,12 +79,26 @@ You can override anything in the base templates, or specific pages/partials, but
 
 Migrations live in `client/migrations`. To run them, add the -c flag to soda, e.g.:
 
-For Postgres migrations:
+To generate Postgres migrations:
 ~~~
+cd client/clienthandlers
+soda -c ../../migrations-pg/database.yml generate fizz SomeMigrationName
+~~~
+
+To run Postgres migrations:
+~~~
+cd client/clienthandlers
 soda -c ../../migrations-pg/database.yml migrate
 ~~~
 
-For MariaDB/MySQL migrations:
+To generate MariaDB/MySQL migrations:
 ~~~
+cd client/clienthandlers
+soda -c ../../database.yml generate fizz SomeMigration
+~~~
+
+To run MariaDB/MySQL migrations:
+~~~
+cd client/clienthandlers
 soda -c ../../database.yml migrate
 ~~~
