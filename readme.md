@@ -74,3 +74,31 @@ For admin pages:
 You can override anything in the base templates, or specific pages/partials, but putting a file in 
 `client/clientviews/public`, `client/clientviews/public/partials`, `client/clientviews/admin`, or 
 `client/clientviews/admin/partials`.
+
+## Client Specific Migrations
+
+Migrations live in `client/migrations`. To run them, add the -c flag to soda, e.g.:
+
+To generate Postgres migrations:
+~~~
+cd client/clienthandlers
+soda -c ../../migrations-pg/database.yml generate fizz SomeMigrationName
+~~~
+
+To run Postgres migrations:
+~~~
+cd client/clienthandlers
+soda -c ../../migrations-pg/database.yml migrate
+~~~
+
+To generate MariaDB/MySQL migrations:
+~~~
+cd client/clienthandlers
+soda -c ../../database.yml generate fizz SomeMigration
+~~~
+
+To run MariaDB/MySQL migrations:
+~~~
+cd client/clienthandlers
+soda -c ../../database.yml migrate
+~~~
