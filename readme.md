@@ -102,3 +102,5 @@ To run MariaDB/MySQL migrations:
 cd client/clienthandlers
 soda -c ../../database.yml migrate
 ~~~
+
+## Middleware
