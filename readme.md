@@ -20,7 +20,7 @@ in Preferences -> Version Control.
 ## Updating on server
 Change  `update.sh` in GoBlender root folder so as to enable git pull of client:
 
-```bash
+```shell script
 # uncomment if using custom client code
 #cd ./client/clienthandlers
 #git pull
@@ -35,7 +35,7 @@ Change  `update.sh` in GoBlender root folder so as to enable git pull of client:
 
 After changing, it should look like this (assuming you want to run postgres migrations):
 
-```bash
+```shell script
 # uncomment if using custom client code
 cd ./client/clienthandlers
 git pull
