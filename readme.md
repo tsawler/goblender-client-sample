@@ -25,15 +25,27 @@ Change  `update.sh` in GoBlender root folder so as to enable git pull of client:
 #cd ./client/clienthandlers
 #git pull
 #cd ../..
+
+# run migrations for pg
+# soda migrate -c ../../migrations-pg/database.yml
+
+#run client migrations for mariadb
+# soda migrate -c ../../database.yml
 ```
 
-After changing, it should look like this:
+After changing, it should look like this (assuming you want to run postgres migrations):
 
 ```
 # uncomment if using custom client code
 cd ./client/clienthandlers
 git pull
 cd ../..
+
+# run migrations for pg
+soda migrate -c ../../migrations-pg/database.yml
+
+#run client migrations for mariadb
+# soda migrate -c ../../database.yml
 ```
 
 
