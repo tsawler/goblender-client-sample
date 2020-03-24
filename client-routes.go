@@ -3,6 +3,7 @@ package clienthandlers
 import (
 	"github.com/bmizerany/pat"
 	"github.com/justinas/alice"
+	mw "github.com/tsawler/goblender/pkg/middleware"
 	"net/http"
 )
 
@@ -14,7 +15,8 @@ func ClientRoutes(mux *pat.PatternServeMux, standardMiddleWare, dynamicMiddlewar
 	// we can override routes in goblender, if we wish, assuming we init the handlers in client-init.go
 	//mux.Get("/", dynamicMiddleware.ThenFunc(pageHandlers.Home))
 
-	mux.Get("/client/some-handler", standardMiddleWare.ThenFunc(SomeHandler))
+	// this route requires both a goBlender middleware, and a custom client middleware
+	mux.Get("/client/some-handler", standardMiddleWare.Append(mw.Auth).Append(SomeRole).ThenFunc(SomeHandler))
 
 	// public folder
 	fileServer := http.FileServer(http.Dir("./client/clienthandlers/public/"))

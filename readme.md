@@ -1,6 +1,6 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/tsawler/goblender-client-sample)](https://goreportcard.com/report/github.com/tsawler/goblender-client-sample)
 [![License](http://img.shields.io/badge/license-mit-blue.svg?style=flat-square)](https://raw.githubusercontent.com/tsawler/goblender/master/LICENSE)
-[![Version](https://img.shields.io/badge/goversion-1.13.x-blue.svg)](https://golang.org)
+[![Version](https://img.shields.io/badge/goversion-1.14.x-blue.svg)](https://golang.org)
 <a href="https://golang.org"><img src="https://img.shields.io/badge/powered_by-Go-3362c2.svg?style=flat-square" alt="Built with GoLang"></a> 
 
 
@@ -20,20 +20,32 @@ in Preferences -> Version Control.
 ## Updating on server
 Change  `update.sh` in GoBlender root folder so as to enable git pull of client:
 
-```
+```shell script
 # uncomment if using custom client code
 #cd ./client/clienthandlers
 #git pull
 #cd ../..
+
+# run migrations for pg
+# soda migrate -c ../../migrations-pg/database.yml
+
+#run client migrations for mariadb
+# soda migrate -c ../../database.yml
 ```
 
-After changing, it should look like this:
+After changing, it should look like this (assuming you want to run postgres migrations):
 
-```
+```shell script
 # uncomment if using custom client code
 cd ./client/clienthandlers
 git pull
 cd ../..
+
+# run migrations for pg
+soda migrate -c ../../migrations-pg/database.yml
+
+#run client migrations for mariadb
+# soda migrate -c ../../database.yml
 ```
 
 
@@ -102,3 +114,23 @@ To run MariaDB/MySQL migrations:
 cd client/clienthandlers
 soda -c ../../database.yml migrate
 ~~~
+
+## Middleware
+
+Add custom middleware to `./client/clienthandlers/client-middleware.go`, e.g.:
+
+```go
+// SomeMiddleware is sample middleware
+func SomeMiddleware(next http.Handler) http.Handler {
+    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+        ok := true
+        // perform some logic to set ok
+        
+        if ok {
+            next.ServeHTTP(w, r)
+        } else {
+         helpers.ClientError(w, http.StatusUnauthorized)
+        }
+    })
+}
+```

@@ -62,4 +62,8 @@ func ClientInit(c config.AppConfig, p *driver.DB) {
 		pageHandlers = handlers.NewPageHandler(app, p, userHandlers, preferenceHandlers)
 		postHandlers = handlers.NewPostHandlers(app, p, pageHandlers)
 	}
+
+	// create client middleware
+	NewClientMiddleware(app, userHandlers)
+
 }
