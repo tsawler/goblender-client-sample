@@ -116,3 +116,21 @@ soda -c ../../database.yml migrate
 ~~~
 
 ## Middleware
+
+Add custom middleware to `./client/clienthandlers/client-middleware.go`, e.g.:
+
+```go
+// SomeMiddleware is sample middleware
+func SomeMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		ok := true
+        // perform some logic to set ok
+
+		if ok {
+			next.ServeHTTP(w, r)
+		} else {
+			helpers.ClientError(w, http.StatusUnauthorized)
+		}
+	})
+}
+```
