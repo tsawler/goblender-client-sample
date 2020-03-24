@@ -36,3 +36,41 @@ git pull
 cd ../..
 ```
 
+
+## Using custom templates
+
+Inside of `clientviews` there are two folders: `public` and `private`. If you wish to use the base templates
+from goBlender to create templates, do it like this:
+
+For public pages:
+
+```
+{{template "base" .}}
+
+{{define "title"}}Some title{{end}}
+
+{{define "body"}}
+    <p>Put whatever you want here</a>
+{{end}}
+```
+
+For admin pages:
+
+```
+{{template "admin-base" .}}
+
+{{define "title"}}Some Title - vMaintain Admin{{end}}
+
+{{define "admin-title"}}Some title{{end}}
+{{define "content-title"}}Some title{{end}}
+
+{{define "content"}}
+    <p>Some content</p>
+{{end}}
+```
+
+**Note**
+
+You can override anything in the base templates, or specific pages/partials, but putting a file in 
+`client/clientviews/public`, `client/clientviews/public/partials`, `client/clientviews/admin`, or 
+`client/clientviews/admin/partials`.
