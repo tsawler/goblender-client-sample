@@ -29,7 +29,7 @@ func ClientInit(c config.AppConfig, p *driver.DB) {
 
 	// if we have additional databases (external to this application) we set the connection here
 	// The connection is specified in goBlender preferences
-	//conn := app.Connections["wheels"]
+	//conn := app.AlternateConnection
 
 	// loggers
 	infoLog = app.InfoLog
