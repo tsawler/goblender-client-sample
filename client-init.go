@@ -41,11 +41,6 @@ func ClientInit(c config.AppConfig, p *driver.DB) {
 	// if we want a local model, eg one to hit pages in goblender's db:
 	pageModel = page.NewSQLPageRepo(p.SQL)
 
-	infoLog = app.InfoLog
-	errorLog = app.ErrorLog
-	pageModel = page.NewSQLPageRepo(p.SQL)
-	parentDB = p
-
 	// we can access handlers from goblender, but need to initialize them first
 	if app.Database == "postgresql" {
 		preferenceHandlers = handlers.NewPostgresPreferenceHandlers(p)
