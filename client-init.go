@@ -60,5 +60,4 @@ func ClientInit(c config.AppConfig, p *driver.DB) {
 
 	// create client middleware
 	NewClientMiddleware(app, userHandlers)
-
 }
