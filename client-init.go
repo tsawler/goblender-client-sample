@@ -23,12 +23,14 @@ var roleHandlers *handlers.RoleDBRepo
 var historyHandlers *handlers.HistoryDBRepo
 var postHandlers *handlers.PostDBRepo
 var backupRepo *backups.BackupDBRepo
+var repo *handlers.DBRepo
 
 // ClientInit gives us access to site values for client code.
-func ClientInit(c config.AppConfig, p *driver.DB, br *backups.BackupDBRepo) {
+func ClientInit(c config.AppConfig, p *driver.DB, br *backups.BackupDBRepo, r *handlers.DBRepo) {
 	// c is the application config, from goblender
 	app = c
 	backupRepo = br
+	repo = r
 
 	// if we have additional databases (external to this application) we set the connection here
 	// The connection is specified in goBlender preferences
