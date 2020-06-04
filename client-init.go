@@ -54,6 +54,7 @@ func ClientInit(c config.AppConfig, p *driver.DB, br *backups.BackupDBRepo, r *h
 		userHandlers = handlers.NewPostgresUserHandlers(app, p, roleHandlers)
 		pageHandlers = handlers.NewPostgresPageHandler(app, p, userHandlers, preferenceHandlers, backupRepo)
 		postHandlers = handlers.NewPostgresPostHandlers(app, p, pageHandlers)
+		handlers.NewPostgresqlHandlers(p, app.ServerName, app.InProduction)
 	} else {
 		preferenceHandlers = handlers.NewPreferenceHandlers(p)
 		historyHandlers = handlers.NewHistoryHandler(p)
@@ -61,6 +62,7 @@ func ClientInit(c config.AppConfig, p *driver.DB, br *backups.BackupDBRepo, r *h
 		userHandlers = handlers.NewUserHandlers(app, p, roleHandlers)
 		pageHandlers = handlers.NewPageHandler(app, p, userHandlers, preferenceHandlers, backupRepo)
 		postHandlers = handlers.NewPostHandlers(app, p, pageHandlers)
+		handlers.NewMysqlHandlers(p, app.ServerName, app.InProduction)
 	}
 
 	// create client middleware
