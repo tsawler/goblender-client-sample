@@ -3,6 +3,7 @@ package clienthandlers
 import (
 	"github.com/bmizerany/pat"
 	"github.com/justinas/alice"
+	"github.com/tsawler/goblender/pkg/handlers"
 	mw "github.com/tsawler/goblender/pkg/middleware"
 	"net/http"
 )
@@ -12,8 +13,8 @@ import (
 // using the middleware.* functions.
 func ClientRoutes(mux *pat.PatternServeMux, standardMiddleWare, dynamicMiddleware alice.Chain) (*pat.PatternServeMux, error) {
 
-	// we can override routes in goblender, if we wish, assuming we init the handlers in client-init.go
-	//mux.Get("/", dynamicMiddleware.ThenFunc(pageHandlers.Home))
+	// we can use any of the handlers in goBlender, e.g.
+	mux.Get("/client/yellow/submarine", standardMiddleWare.ThenFunc(handlers.Repo.ShowGalleryPage(app)))
 
 	// this route requires both a goBlender middleware, and a custom client middleware
 	mux.Get("/client/some-handler", standardMiddleWare.Append(mw.Auth).Append(SomeRole).ThenFunc(SomeHandler))

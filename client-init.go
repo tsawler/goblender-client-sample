@@ -4,28 +4,21 @@ import (
 	"github.com/tsawler/goblender/pkg/config"
 	"github.com/tsawler/goblender/pkg/driver"
 	"github.com/tsawler/goblender/pkg/handlers"
-	"github.com/tsawler/goblender/pkg/repository"
-	"github.com/tsawler/goblender/pkg/repository/page"
 	"log"
 )
 
 var app config.AppConfig
 var infoLog *log.Logger
 var errorLog *log.Logger
-var pageModel repository.PageRepo
 var parentDB *driver.DB
 
-var preferenceHandlers *handlers.PreferenceDBRepo
-var pageHandlers *handlers.PageDBRepo
-var userHandlers *handlers.UserDBRepo
-var roleHandlers *handlers.RoleDBRepo
-var historyHandlers *handlers.HistoryDBRepo
-var postHandlers *handlers.PostDBRepo
+var repo *handlers.DBRepo
 
 // ClientInit gives us access to site values for client code.
-func ClientInit(c config.AppConfig, p *driver.DB) {
+func ClientInit(c config.AppConfig, p *driver.DB, r *handlers.DBRepo) {
 	// c is the application config, from goblender
 	app = c
+	repo = r
 
 	// if we have additional databases (external to this application) we set the connection here
 	// The connection is specified in goBlender preferences
@@ -39,31 +32,15 @@ func ClientInit(c config.AppConfig, p *driver.DB) {
 	parentDB = p
 
 	// if we want a local model, eg one to hit pages in goblender's db:
-	pageModel = page.NewSQLPageRepo(p.SQL)
-
-	infoLog = app.InfoLog
-	errorLog = app.ErrorLog
-	pageModel = page.NewSQLPageRepo(p.SQL)
-	parentDB = p
+	//pageModel = page.NewSQLPageRepo(p.SQL)
 
 	// we can access handlers from goblender, but need to initialize them first
 	if app.Database == "postgresql" {
-		preferenceHandlers = handlers.NewPostgresPreferenceHandlers(p)
-		historyHandlers = handlers.NewPostgresHistoryHandler(p)
-		roleHandlers = handlers.NewPostgresRoleHandlers(p, historyHandlers)
-		userHandlers = handlers.NewPostgresUserHandlers(app, p, roleHandlers)
-		pageHandlers = handlers.NewPostgresPageHandler(app, p, userHandlers, preferenceHandlers)
-		postHandlers = handlers.NewPostgresPostHandlers(app, p, pageHandlers)
+		handlers.NewPostgresqlHandlers(p, app.ServerName, app.InProduction)
 	} else {
-		preferenceHandlers = handlers.NewPreferenceHandlers(p)
-		historyHandlers = handlers.NewHistoryHandler(p)
-		roleHandlers = handlers.NewRoleHandlers(p, historyHandlers)
-		userHandlers = handlers.NewUserHandlers(app, p, roleHandlers)
-		pageHandlers = handlers.NewPageHandler(app, p, userHandlers, preferenceHandlers)
-		postHandlers = handlers.NewPostHandlers(app, p, pageHandlers)
+		handlers.NewMysqlHandlers(p, app.ServerName, app.InProduction)
 	}
 
 	// create client middleware
-	NewClientMiddleware(app, userHandlers)
-
+	NewClientMiddleware(app, repo)
 }
