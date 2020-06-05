@@ -5,7 +5,6 @@ import (
 	"github.com/tsawler/goblender/pkg/driver"
 	"github.com/tsawler/goblender/pkg/handlers"
 	"github.com/tsawler/goblender/pkg/repository"
-	"github.com/tsawler/goblender/pkg/repository/page"
 	"log"
 )
 
@@ -35,7 +34,7 @@ func ClientInit(c config.AppConfig, p *driver.DB, r *handlers.DBRepo) {
 	parentDB = p
 
 	// if we want a local model, eg one to hit pages in goblender's db:
-	pageModel = page.NewSQLPageRepo(p.SQL)
+	//pageModel = page.NewSQLPageRepo(p.SQL)
 
 	// we can access handlers from goblender, but need to initialize them first
 	if app.Database == "postgresql" {
