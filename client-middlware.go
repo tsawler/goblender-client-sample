@@ -17,13 +17,12 @@ var preferenceMap map[string]string
 var inProduction bool
 
 // NewClientMiddleware sets app config for middleware
-func NewClientMiddleware(app config.AppConfig, uh *handlers.UserDBRepo) {
+func NewClientMiddleware(app config.AppConfig, repo *handlers.DBRepo) {
 	serverName = app.ServerName
 	live = app.InProduction
 	domain = app.Domain
 	preferenceMap = app.PreferenceMap
 	session = app.Session
-	userHandlers = uh
 	inProduction = app.InProduction
 }
 
@@ -42,7 +41,7 @@ func SomeRole(next http.Handler) http.Handler {
 
 // checkRole checks roles for the user
 func checkRole(role string, userId int) bool {
-	user, _ := userHandlers.GetById(userId)
+	user, _ := repo.DB.GetUserById(userId)
 	roles := user.Roles
 
 	if _, ok := roles[role]; ok {
