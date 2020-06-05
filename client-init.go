@@ -4,14 +4,12 @@ import (
 	"github.com/tsawler/goblender/pkg/config"
 	"github.com/tsawler/goblender/pkg/driver"
 	"github.com/tsawler/goblender/pkg/handlers"
-	"github.com/tsawler/goblender/pkg/repository"
 	"log"
 )
 
 var app config.AppConfig
 var infoLog *log.Logger
 var errorLog *log.Logger
-var pageModel repository.PageRepo
 var parentDB *driver.DB
 
 var repo *handlers.DBRepo
