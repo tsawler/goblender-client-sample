@@ -36,20 +36,8 @@ func ClientInit(c config.AppConfig, p *driver.DB, r *handlers.DBRepo) {
 
 	// we can access handlers from goblender, but need to initialize them first
 	if app.Database == "postgresql" {
-		//preferenceHandlers = handlers.NewPostgresPreferenceHandlers(p)
-		//historyHandlers = handlers.NewPostgresHistoryHandler(p)
-		//roleHandlers = handlers.NewPostgresRoleHandlers(p, historyHandlers)
-		//userHandlers = handlers.NewPostgresUserHandlers(app, p, roleHandlers)
-		//pageHandlers = handlers.NewPostgresPageHandler(app, p, userHandlers, preferenceHandlers, backupRepo)
-		//postHandlers = handlers.NewPostgresPostHandlers(app, p, pageHandlers)
 		handlers.NewPostgresqlHandlers(p, app.ServerName, app.InProduction)
 	} else {
-		//preferenceHandlers = handlers.NewPreferenceHandlers(p)
-		//historyHandlers = handlers.NewHistoryHandler(p)
-		//roleHandlers = handlers.NewRoleHandlers(p, historyHandlers)
-		//userHandlers = handlers.NewUserHandlers(app, p, roleHandlers)
-		//pageHandlers = handlers.NewPageHandler(app, p, userHandlers, preferenceHandlers, backupRepo)
-		//postHandlers = handlers.NewPostHandlers(app, p, pageHandlers)
 		handlers.NewMysqlHandlers(p, app.ServerName, app.InProduction)
 	}
 
