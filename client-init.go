@@ -15,9 +15,9 @@ var parentDB *driver.DB
 var repo *handlers.DBRepo
 
 // ClientInit gives us access to site values for client code.
-func ClientInit(c config.AppConfig, p *driver.DB, rep *handlers.DBRepo) {
+func ClientInit(conf config.AppConfig, parentDriver *driver.DB, rep *handlers.DBRepo) {
 	// c is the application config, from goblender
-	app = c
+	app = conf
 	repo = rep
 
 	// if we have additional databases (external to this application) we set the connection here
@@ -29,16 +29,16 @@ func ClientInit(c config.AppConfig, p *driver.DB, rep *handlers.DBRepo) {
 	errorLog = app.ErrorLog
 
 	// in case we need it, we get the db connection from goblender and save it in a variable
-	parentDB = p
+	parentDB = parentDriver
 
 	// if we want a local model, eg one to hit pages in goblender's db:
 	//pageModel = page.NewSQLPageRepo(p.SQL)
 
 	// we can access handlers from goblender, but need to initialize them first
 	if app.Database == "postgresql" {
-		handlers.NewPostgresqlHandlers(p, app.ServerName, app.InProduction)
+		handlers.NewPostgresqlHandlers(parentDB, app.ServerName, app.InProduction)
 	} else {
-		handlers.NewMysqlHandlers(p, app.ServerName, app.InProduction)
+		handlers.NewMysqlHandlers(parentDB, app.ServerName, app.InProduction)
 	}
 
 	// set different template for pages, if needed
