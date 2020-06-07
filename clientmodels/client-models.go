@@ -8,4 +8,5 @@ type Sample struct {
 	Name      string
 	Phone     string
 	CreatedAt time.Time
+	UpdatedAt time.Time
 }
