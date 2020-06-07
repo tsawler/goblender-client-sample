@@ -41,7 +41,7 @@ func ClientInit(conf config.AppConfig, parentDriver *driver.DB, rep *handlers.DB
 		handlers.NewMysqlHandlers(parentDB, app.ServerName, app.InProduction)
 	}
 
-	// set different template for pages, if needed
+	// set different template for home page, if needed
 	//repo.SetDefaultPageTemplate("client-sample.page.tmpl")
 
 	// create client middleware
