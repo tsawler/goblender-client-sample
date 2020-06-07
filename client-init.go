@@ -15,10 +15,10 @@ var parentDB *driver.DB
 var repo *handlers.DBRepo
 
 // ClientInit gives us access to site values for client code.
-func ClientInit(c config.AppConfig, p *driver.DB, r *handlers.DBRepo) {
+func ClientInit(c config.AppConfig, p *driver.DB, rep *handlers.DBRepo) {
 	// c is the application config, from goblender
 	app = c
-	repo = r
+	repo = rep
 
 	// if we have additional databases (external to this application) we set the connection here
 	// The connection is specified in goBlender preferences
