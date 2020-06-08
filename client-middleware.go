@@ -3,7 +3,6 @@ package clienthandlers
 import (
 	"github.com/alexedwards/scs/v2"
 	"github.com/tsawler/goblender/pkg/config"
-	"github.com/tsawler/goblender/pkg/handlers"
 	"github.com/tsawler/goblender/pkg/helpers"
 	"net/http"
 )
@@ -17,7 +16,7 @@ var preferenceMap map[string]string
 var inProduction bool
 
 // NewClientMiddleware sets app config for middleware
-func NewClientMiddleware(app config.AppConfig, repo *handlers.DBRepo) {
+func NewClientMiddleware(app config.AppConfig) {
 	serverName = app.ServerName
 	live = app.InProduction
 	domain = app.Domain

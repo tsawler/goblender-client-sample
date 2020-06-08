@@ -11,39 +11,38 @@ var app config.AppConfig
 var infoLog *log.Logger
 var errorLog *log.Logger
 var parentDB *driver.DB
-
 var repo *handlers.DBRepo
 
-// ClientInit gives us access to site values for client code.
-func ClientInit(c config.AppConfig, p *driver.DB, r *handlers.DBRepo) {
-	// c is the application config, from goblender
-	app = c
-	repo = r
+// ClientInit gives client code access to goBlender configuration
+func ClientInit(conf config.AppConfig, parentDriver *driver.DB, rep *handlers.DBRepo) {
+	// conf is the application config, from goBlender
+	app = conf
+	repo = rep
 
-	// if we have additional databases (external to this application) we set the connection here
-	// The connection is specified in goBlender preferences
+	// If we have additional databases (external to this application) we set the connection here.
+	// The connection is specified in goBlender preferences.
 	//conn := app.AlternateConnection
 
 	// loggers
 	infoLog = app.InfoLog
 	errorLog = app.ErrorLog
 
-	// in case we need it, we get the db connection from goblender and save it in a variable
-	parentDB = p
+	// In case we need it, we get the database connection from goBlender and save it,
+	parentDB = parentDriver
 
-	// if we want a local model, eg one to hit pages in goblender's db:
-	//pageModel = page.NewSQLPageRepo(p.SQL)
-
-	// we can access handlers from goblender, but need to initialize them first
+	// We can access handlers from goBlender, but need to initialize them first.
 	if app.Database == "postgresql" {
-		handlers.NewPostgresqlHandlers(p, app.ServerName, app.InProduction)
+		handlers.NewPostgresqlHandlers(parentDB, app.ServerName, app.InProduction)
 	} else {
-		handlers.NewMysqlHandlers(p, app.ServerName, app.InProduction)
+		handlers.NewMysqlHandlers(parentDB, app.ServerName, app.InProduction)
 	}
 
-	// set different template for pages, if needed
+	// Set a different template for home page, if needed.
+	//repo.SetHomePageTemplate("client-sample.page.tmpl")
+
+	// Set a different template for inside pages, if needed.
 	//repo.SetDefaultPageTemplate("client-sample.page.tmpl")
 
-	// create client middleware
-	NewClientMiddleware(app, repo)
+	// Create client middleware
+	NewClientMiddleware(app)
 }
