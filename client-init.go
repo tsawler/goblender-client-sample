@@ -38,6 +38,9 @@ func ClientInit(conf config.AppConfig, parentDriver *driver.DB, rep *handlers.DB
 	}
 
 	// Set a different template for home page, if needed.
+	//repo.SetHomePageTemplate("client-sample.page.tmpl")
+
+	// Set a different template for inside pages, if needed.
 	//repo.SetDefaultPageTemplate("client-sample.page.tmpl")
 
 	// Create client middleware
