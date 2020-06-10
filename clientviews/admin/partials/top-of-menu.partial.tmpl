@@ -1,0 +1,14 @@
+{{define "top-of-menu"}}
+    {{if hasRole "inventory" .Auth.ID}}
+        <li id="inventory" {{if eq .CurrentSegment "inventory"}} class="active" {{end}}>
+            <a href="#!"><i class="fa fa-car fa-fw"></i> <span class="nav-label">Publications</span> <span
+                        class="fa arrow"></span></a>
+            <ul class="nav nav-second-level collapse">
+                <li><a href="/admin/inventory/all-vehicles">All Vehicles</a></li>
+            </ul>
+        </li>
+    {{end}}
+
+
+
+{{end}}
