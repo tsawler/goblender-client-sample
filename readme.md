@@ -62,7 +62,7 @@ For public pages:
 {{define "title"}}Some title{{end}}
 
 {{define "body"}}
-    <p>Put whatever you want here</a>
+    <p>Put whatever you want here</p>
 {{end}}
 ```
 
