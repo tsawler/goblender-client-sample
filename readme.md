@@ -1,6 +1,6 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/tsawler/goblender-client-sample)](https://goreportcard.com/report/github.com/tsawler/goblender-client-sample)
 [![License](http://img.shields.io/badge/license-mit-blue.svg?style=flat-square)](https://raw.githubusercontent.com/tsawler/goblender/master/LICENSE)
-[![Version](https://img.shields.io/badge/goversion-1.14.x-blue.svg)](https://golang.org)
+[![Version](https://img.shields.io/badge/goversion-1.15.x-blue.svg)](https://golang.org)
 <a href="https://golang.org"><img src="https://img.shields.io/badge/powered_by-Go-3362c2.svg?style=flat-square" alt="Built with GoLang"></a> 
 
 
@@ -62,7 +62,7 @@ For public pages:
 {{define "title"}}Some title{{end}}
 
 {{define "body"}}
-    <p>Put whatever you want here</a>
+    <p>Put whatever you want here</p>
 {{end}}
 ```
 
